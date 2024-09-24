@@ -19,7 +19,9 @@ This project will only run on linux or mac as pyheif module doesn't work on wind
 
 docker run -p 5000:5000 -v ${PWD}\uploads:/app/uploads -v ${PWD}\converted:/app/converted saumil156/image-converter:1.0
 
-docker build -t saumil156/image-converter:1.0 .
+docker build -t saumil156/image-converter:1.1 .
+docker push saumil156/image-converter:1.1
+
 
 git bash
 docker run -p 5000:5000 -v "$(pwd)/uploads:/app/uploads" -v "$(pwd)/converted:/app/converted" heif_to_jpeg
