@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: image-converter
-        image: saumil156/image-converter:latest
+        image: saumil156/image-converter:1.1
         ports:
         - containerPort: 5000
         volumeMounts:
