@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-converter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: image-converter
+  template:
+    metadata:
+      labels:
+        app: image-converter
+    spec:
+      containers:
+      - name: image-converter
+        image: saumil156/image-converter:1.0
+        ports:
+        - containerPort: 5000
+        volumeMounts:
+        - name: uploads-volume
+          mountPath: /app/uploads
+        - name: converted-volume
+          mountPath: /app/converted
+      volumes:
+      - name: uploads-volume
+        persistentVolumeClaim:
+          claimName: uploads-pvc
+      - name: converted-volume
+        persistentVolumeClaim:
+          claimName: converted-pvc

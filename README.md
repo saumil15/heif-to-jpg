@@ -17,3 +17,9 @@ This is a web-based application built using Flask that allows users to upload HE
 
 This project will only run on linux or mac as pyheif module doesn't work on windows. if you wish to run on windows use docker image
 
+docker run -p 5000:5000 -v ${PWD}\uploads:/app/uploads -v ${PWD}\converted:/app/converted saumil156/image-converter:1.0
+
+docker build -t saumil156/image-converter:1.0 .
+
+git bash
+docker run -p 5000:5000 -v "$(pwd)/uploads:/app/uploads" -v "$(pwd)/converted:/app/converted" heif_to_jpeg
