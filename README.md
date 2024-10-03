@@ -25,3 +25,10 @@ docker push saumil156/image-converter:1.1
 
 git bash
 docker run -p 5000:5000 -v "$(pwd)/uploads:/app/uploads" -v "$(pwd)/converted:/app/converted" heif_to_jpeg
+
+
+Running Argo cd:
+
+1. kubectl create namespace argocd
+2. kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+3. kubectl port-forward svc/argocd-server -n argocd 8080:443
