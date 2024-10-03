@@ -76,7 +76,7 @@ def home():
     return render_template('home.html')
 
 @app.route('/admin_page/')
-def home():
+def admin_fn():
     return render_template('admin.html')
 
 if __name__ == "__main__":
