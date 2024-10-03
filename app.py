@@ -75,5 +75,9 @@ def show_converted_files():
 def home():
     return render_template('home.html')
 
+@app.route('/admin_page/')
+def home():
+    return render_template('admin.html')
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
