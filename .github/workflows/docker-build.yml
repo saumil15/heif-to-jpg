@@ -1,0 +1,42 @@
+name: Build, Push and Update Deployment
+
+on:
+  push:
+    branches:
+      - main  # or your preferred branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository containing your code and Kubernetes manifests
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Log in to Docker Hub (or another registry)
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      # Step 3: Build the Docker image and tag it with the Git SHA (unique identifier for each commit)
+      - name: Build Docker image
+        run: docker build -t saumil156/image-converter:${{ github.sha }} .
+
+      # Step 4: Push the Docker image to the registry
+      - name: Push Docker image
+        run: docker push saumil156/image-converter:${{ github.sha }}
+
+      # Step 5: Update deployment.yaml with the new image tag (using `sed`)
+      - name: Update Kubernetes deployment with new image tag
+        run: |
+          sed -i 's#saumil156/image-converter:.*#saumil156/image-converter:${{ github.sha }}#' deployment.yaml
+        # 'k8s/deployment.yaml' is the path to your manifest file in the repo
+
+      # Step 6: Commit the changes to the repo (to trigger Argo CD sync)
+      - name: Commit updated deployment file
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add deployment.yaml
+          git commit -m "Update deployment.yaml with image tag ${{ github.sha }}"
+          git push

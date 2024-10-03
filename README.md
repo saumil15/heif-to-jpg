@@ -32,3 +32,9 @@ Running Argo cd:
 1. kubectl create namespace argocd
 2. kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 3. kubectl port-forward svc/argocd-server -n argocd 8080:443
+
+
+Creating new image after changes
+
+You need to create a new tag and push the image into docker hub repo 
+then use the new tag for your next sync
