@@ -36,5 +36,4 @@ Running Argo cd:
 
 Creating new image after changes
 
-You need to create a new tag and push the image into docker hub repo 
-then use the new tag for your next sync
+Automated the image creation and pushing it to docker hub using github action
