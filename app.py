@@ -33,7 +33,7 @@ def heif_to_jpg(heif_path, jpg_path):
     )
     image.save(jpg_path, "JPEG")
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/app/', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         if 'files' not in request.files:
@@ -71,13 +71,9 @@ def show_converted_files():
     filenames = request.args.getlist('filenames')
     return render_template('converted_files.html', filenames=filenames)
 
-@app.route('/home/')
+@app.route('/')
 def home():
     return render_template('home.html')
-
-@app.route('/admin_page/')
-def admin_fn():
-    return render_template('admin.html')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
