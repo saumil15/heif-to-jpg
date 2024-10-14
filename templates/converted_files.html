@@ -13,7 +13,7 @@
   <section class="hero">
     <div class="hero-content">
       <div class="container">
-        <h1 class="mt-5">Converted Files are as follows:</h1>
+        <a href="{{ url_for('home') }}" class="mt-5">Converted Files are as follows:</a>
         <ul>
           {% for filename in filenames %}
             <li><a href="{{ url_for('converted_file', filename=filename) }}">{{ filename }}</a></li>
