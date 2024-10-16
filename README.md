@@ -31,7 +31,7 @@ docker build -t saumil156/image-converter:1.1 .
 docker push saumil156/image-converter:1.1
 
 
-Git bash
+### Git bash
 docker run -p 5000:5000 -v "$(pwd)/uploads:/app/uploads" -v "$(pwd)/converted:/app/converted" heif_to_jpeg
 
 
