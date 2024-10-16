@@ -1,3 +1,10 @@
+/* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 /* Common body style */
 body {
     margin: 0;
@@ -5,16 +12,32 @@ body {
     background-color: #f4f4f4;
 }
 
-/* Header Style */
+/* Header Styles */
 header {
-    background-color: #333;
+    background-color: #1e1e1e; /* Dark background */
     color: #fff;
-    padding: 10px 0;
-    text-align: center;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds subtle shadow */
 }
 
-header h1 {
-    margin: 0;
+/* Logo or Site Name */
+header .logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ff6347; /* Bright accent color for logo */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+header .logo:hover {
+    color: #ff4500; /* Slight hover effect on the logo */
 }
 
 /* Hero Section */
