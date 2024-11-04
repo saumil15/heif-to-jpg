@@ -18,10 +18,12 @@ jobs:
       with:
         version: 'latest'
 
-    - name: Set up kubeconfig
+    - name: Configure kubeconfig
       env:
-        KUBECONFIG: ${{ secrets.KUBECONFIG }}
-      run: echo "${KUBECONFIG}" > ~/.kube/config
+        KUBECONFIG_DATA: ${{ secrets.KUBECONFIG }}
+      run: |
+        mkdir -p ~/.kube  # Create the .kube directory if it doesn't exist
+        echo "$KUBECONFIG_DATA" | base64 --decode > ~/.kube/config  # Decode and write the kubeconfig
 
     - name: Sync Argo CD Application
       run: |
