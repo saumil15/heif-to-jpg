@@ -1,0 +1,28 @@
+name: Argo CD GitOps Deploy
+
+on:
+  push:
+    branches:
+      - main  # Trigger on pushes to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up kubectl
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'latest'
+
+    - name: Set up kubeconfig
+      env:
+        KUBECONFIG: ${{ secrets.KUBECONFIG }}
+      run: echo "${KUBECONFIG}" > ~/.kube/config
+
+    - name: Sync Argo CD Application
+      run: |
+        kubectl apply -f argocd-app.yaml -n argocd

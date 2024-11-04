@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: heif-to-jpg-app
+  namespace: argocd  # Namespace where Argo CD is installed
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/saumil15/heif-to-jpg  # Git repository URL
+    path: .  # Path to the directory containing your Kubernetes manifests in the repo
+    targetRevision: HEAD  # Branch, tag, or commit to track
+  destination:
+    server: https://kubernetes.default.svc  # In-cluster API server
+    namespace: default  # Target namespace in Kubernetes cluster
+  syncPolicy:
+    automated:
+      prune: true      # Automatically delete resources not defined in the repository
+      selfHeal: true   # Automatically sync differences between live and desired state
