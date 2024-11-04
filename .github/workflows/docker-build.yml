@@ -45,3 +45,22 @@ jobs:
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the built-in GITHUB_TOKEN
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build  # Make this job dependent on the 'build' job
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest'
+
+      - name: Configure kubeconfig
+        env:
+          KUBECONFIG_DATA: ${{ secrets.KUBECONFIG }}
+        run: |
+          mkdir -p ~/.kube  # Create the .kube directory if it doesn't exist
+          echo "$KUBECONFIG_DATA" | base64 --decode > ~/.kube/config  # Decode and write the kubeconfig
