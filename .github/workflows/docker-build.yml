@@ -63,4 +63,4 @@ jobs:
           KUBECONFIG_DATA: ${{ secrets.KUBECONFIG }}
         run: |
           mkdir -p ~/.kube  # Create the .kube directory if it doesn't exist
-          echo "$KUBECONFIG_DATA" | base64 --decode > ~/.kube/config  # Decode and write the kubeconfig
+          echo "$KUBECONFIG_DATA" | base64 --decode > ~/.kube/config  # Decode and write the kubeconfig .
